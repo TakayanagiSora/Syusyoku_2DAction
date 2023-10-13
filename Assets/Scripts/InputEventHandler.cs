@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UniRx;
 
-public class InputController : MonoBehaviour
+public class InputEventHandler : MonoBehaviour
 {
     private Keyboard _keyboard = default;
 
