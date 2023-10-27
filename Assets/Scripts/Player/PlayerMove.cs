@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -39,12 +40,14 @@ public class PlayerMove : MonoBehaviour
     //private float _jumpPowerIncreaseValue_AtLast = default;
     // ------------------------------------------------------------
 
-    [Tooltip("増加分のジャンプ力")]
-    private float _currentJumpPower = default;
+    [Tooltip("上下方向の速度")]
+    private float _ySpeed = default;
     [Tooltip("地面に着いている間trueを返す")]
     private bool _isGrounded = default;
     [Tooltip("ジャンプ実行中の間trueを返す")]
-    private bool _isJump = default;
+    private bool _isJumping = default;
+    [Tooltip("ジャンプ入力があったらtrueを返す")]
+    private bool _isJumpInput = default;
 
     [Tooltip("限界ジャンプ力の係数（基本ジャンプ力に掛けた値が限界値）")]
     private const float JUMP_LIMIT_COEFFICIENT = 3.0f;
@@ -66,7 +69,6 @@ public class PlayerMove : MonoBehaviour
         _gameInputs.Player.Move.performed += OnMove;
         _gameInputs.Player.Move.canceled += OnStop;
         _gameInputs.Player.Jump.started += OnJump;
-        _gameInputs.Player.Jump.canceled += OnCancelJump;
 
         _groundChecker = new RayCaster(direction: Vector2.down, distance: 0.6f);
     }
@@ -97,13 +99,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        _currentJumpPower = _standardJumpPower;
-        _isJump = true;
-    }
-
-    private void OnCancelJump(InputAction.CallbackContext context)
-    {
-
+        _isJumpInput = true;
     }
 
     /// <summary>
@@ -125,10 +121,32 @@ public class PlayerMove : MonoBehaviour
     public Vector2 Jump()
     {
         bool isGrounded = _groundChecker.CheckGround(origin: _transform.position);
-        if (_isJump && isGrounded) { return Vector2.zero; }
 
-        _currentJumpPower -= _gravityAcceleration;
-        return Vector2.up * _currentJumpPower;
+        // 地面にいる
+        if (isGrounded)
+        {
+            // ジャンプしていない
+            if (!_isJumping)
+            {
+                _ySpeed = 0f;
+
+                // ジャンプ入力がある
+                if (_isJumpInput)
+                {
+                    _ySpeed = _standardJumpPower;
+                    _isJumping = true;
+                }
+            }
+        }
+        // 空中にいる
+        else
+        {
+            _ySpeed -= _gravityAcceleration;
+            _isJumping = false;
+            _isJumpInput = false;
+        }
+
+        return Vector2.up * _ySpeed;
     }
 
     /// <summary>
@@ -146,26 +164,5 @@ public class PlayerMove : MonoBehaviour
 
         // 算出した最終速度（基本速度 + 増加速度）
         return _standardSpeed + previousSpeed;
-    }
-
-    /// <summary>
-    /// ジャンプ量の算出
-    /// </summary>
-    /// <param name="previousPower">1フレーム前のジャンプ量</param>
-    /// <returns></returns>
-    private float CalculateJumpPower(ref float previousPower)
-    {
-        _currentJumpPower -= _gravityAcceleration;
-
-        return _currentJumpPower;
-
-        //float currentPower = _standardJumpPower + previousPower;
-        //float limitPower = _standardJumpPower * JUMP_LIMIT_COEFFICIENT;
-
-        //// 現在のジャンプ力が限界値を下回っている間、ジャンプ力を増加させる
-        //if (currentPower < limitPower) { previousPower += _jumpPowerIncreaseValue_AtFirst; }
-
-        //// 算出した最終ジャンプ力（基本ジャンプ力 + 増加ジャンプ力）
-        //return _standardJumpPower + previousPower;
     }
 }
