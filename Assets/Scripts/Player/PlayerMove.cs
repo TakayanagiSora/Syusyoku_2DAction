@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
+using UniRx;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class PlayerMove : MonoBehaviour
     private float _standardJumpPower = default;
     [SerializeField, Tooltip("重力加速度")]
     private float _gravityAcceleration = default;
+    [SerializeField, Tooltip("重力上昇係数")]
+    private float _gravityCoefficient = default;
 
     // ジャンプの前半後半でジャンプ力の増加量を分ける--------------
     // => 初速が高く、空中で減速するようなジャンプ
@@ -42,16 +45,13 @@ public class PlayerMove : MonoBehaviour
 
     [Tooltip("上下方向の速度")]
     private float _ySpeed = default;
-    [Tooltip("地面に着いている間trueを返す")]
-    private bool _isGrounded = default;
     [Tooltip("ジャンプ実行中の間trueを返す")]
     private bool _isJumping = default;
     [Tooltip("ジャンプ入力があったらtrueを返す")]
     private bool _isJumpInput = default;
-
-    [Tooltip("限界ジャンプ力の係数（基本ジャンプ力に掛けた値が限界値）")]
-    private const float JUMP_LIMIT_COEFFICIENT = 3.0f;
     #endregion
+
+    RayCaster _rayCaster;
 
 
     private void OnEnable()
@@ -71,10 +71,15 @@ public class PlayerMove : MonoBehaviour
         _gameInputs.Player.Jump.started += OnJump;
 
         _groundChecker = new RayCaster(direction: Vector2.down, distance: 0.6f);
+        _rayCaster = new RayCaster(Vector2.down, 0.6f);
+        _rayCaster.IsGrounded.Subscribe(x => Debug.Log(x));
     }
 
     private void Update()
     {
+        // テスト用
+        _rayCaster.ICheckGround(_transform.position);
+
         Vector2 moveDelta = Run() + Jump();
         _transform.Translate(moveDelta * Time.deltaTime);
     }
@@ -115,7 +120,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ジャンプ処理
+    /// 上下方向のベクトルを算出
     /// <br>- ボタンの入力時間に応じて「大ジャンプ」と「小ジャンプ」に分岐する</br>
     /// </summary>
     public Vector2 Jump()
@@ -142,8 +147,8 @@ public class PlayerMove : MonoBehaviour
         else
         {
             _ySpeed -= _gravityAcceleration;
-            _isJumping = false;
             _isJumpInput = false;
+            _isJumping = false;
         }
 
         return Vector2.up * _ySpeed;

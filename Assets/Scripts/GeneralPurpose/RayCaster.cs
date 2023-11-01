@@ -1,4 +1,5 @@
 using UnityEngine;
+using UniRx;
 
 /// <summary>
 /// RayCast‚ğ—˜—p‚·‚é’ŠÛƒNƒ‰ƒX
@@ -9,9 +10,13 @@ public class RayCaster : IRaycast, IGroundable
     private const int GROUND_LAYER = 1 << 6;
 
     [Tooltip("Ray•ûŒü")]
-    private Vector2 _direction = default;
+    private readonly Vector2 _direction = default;
     [Tooltip("Ray’·")]
-    private float _distance = default;
+    private readonly float _distance = default;
+
+    private ReactiveProperty<bool> _isGrounded = new ReactiveProperty<bool>();
+
+    public IReadOnlyReactiveProperty<bool> IsGrounded => _isGrounded;
 
 
     public RayCaster(Vector2 direction, float distance)
@@ -42,5 +47,11 @@ public class RayCaster : IRaycast, IGroundable
         Debug.DrawRay(origin, _direction * _distance, Color.red);
 
         return isHit;
+    }
+
+    public void ICheckGround(Vector2 origin)
+    {
+        _isGrounded.Value = Physics2D.Raycast(origin, _direction, _distance, GROUND_LAYER);
+        Debug.DrawRay(origin, _direction * _distance, Color.red);
     }
 }
