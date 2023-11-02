@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
 using UniRx;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
     private Transform _transform = default;
     private GameInputs _gameInputs = default;
-    private IGroundable _groundChecker = default;
+    private GroundChecker _groundChecker;
 
     #region Run変数
     [Header("Run変数")]
@@ -51,8 +52,6 @@ public class PlayerMove : MonoBehaviour
     private bool _isJumpInput = default;
     #endregion
 
-    RayCaster _rayCaster;
-
 
     private void OnEnable()
     {
@@ -63,22 +62,30 @@ public class PlayerMove : MonoBehaviour
     {
         _transform = this.transform;
 
+        #region InputSystemのイベント購読
         _gameInputs = new();
         _gameInputs.Enable();
 
         _gameInputs.Player.Move.performed += OnMove;
         _gameInputs.Player.Move.canceled += OnStop;
         _gameInputs.Player.Jump.started += OnJump;
+        #endregion
 
-        _groundChecker = new RayCaster(direction: Vector2.down, distance: 0.6f);
-        _rayCaster = new RayCaster(Vector2.down, 0.6f);
-        _rayCaster.IsGrounded.Subscribe(x => Debug.Log(x));
+        #region GroundCheckerのイベント購読
+        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.6f);
+        _groundChecker.IsGrounded.Subscribe(value =>
+        {
+            // 着地判定を取ったら止まる
+            if (value) { _ySpeed = 0f; }
+            else { _isJumpInput = false; }
+        });
+        #endregion
     }
 
     private void Update()
     {
         // テスト用
-        _rayCaster.ICheckGround(_transform.position);
+        _groundChecker.Check(_transform.position);
 
         Vector2 moveDelta = Run() + Jump();
         _transform.Translate(moveDelta * Time.deltaTime);
@@ -125,30 +132,24 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     public Vector2 Jump()
     {
-        bool isGrounded = _groundChecker.CheckGround(origin: _transform.position);
-
         // 地面にいる
-        if (isGrounded)
+        if (_groundChecker.IsGrounded.Value)
         {
-            // ジャンプしていない
-            if (!_isJumping)
+            // ジャンプ入力がある
+            if (_isJumpInput)
             {
-                _ySpeed = 0f;
-
-                // ジャンプ入力がある
-                if (_isJumpInput)
-                {
-                    _ySpeed = _standardJumpPower;
-                    _isJumping = true;
-                }
+                _ySpeed = _standardJumpPower;
             }
         }
         // 空中にいる
         else
         {
             _ySpeed -= _gravityAcceleration;
-            _isJumpInput = false;
-            _isJumping = false;
+
+            if (_ySpeed <= 0)
+            {
+                _gravityAcceleration *= _gravityCoefficient;
+            }
         }
 
         return Vector2.up * _ySpeed;

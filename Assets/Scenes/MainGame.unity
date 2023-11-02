@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _standardSpeed: 2
   _speedIncreaseValue: 0.1
-  _standardJumpPower: 12
+  _standardJumpPower: 10
   _gravityAcceleration: 0.05
   _gravityCoefficient: 0
 --- !u!1 &519420028
