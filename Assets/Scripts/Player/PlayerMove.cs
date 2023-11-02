@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     private Transform _transform = default;
     private GameInputs _gameInputs = default;
     private GroundChecker _groundChecker;
+    private OnlyOnce _onlyOnce = new OnlyOnce();
 
     #region Run変数
     [Header("Run変数")]
@@ -35,6 +36,8 @@ public class PlayerMove : MonoBehaviour
     private float _gravityAcceleration = default;
     [SerializeField, Tooltip("重力上昇係数")]
     private float _gravityCoefficient = default;
+    [Tooltip("現在の重力")]
+    private float _currentGravity = default;
 
     // ジャンプの前半後半でジャンプ力の増加量を分ける--------------
     // => 初速が高く、空中で減速するようなジャンプ
@@ -46,8 +49,6 @@ public class PlayerMove : MonoBehaviour
 
     [Tooltip("上下方向の速度")]
     private float _ySpeed = default;
-    [Tooltip("ジャンプ実行中の間trueを返す")]
-    private bool _isJumping = default;
     [Tooltip("ジャンプ入力があったらtrueを返す")]
     private bool _isJumpInput = default;
     #endregion
@@ -73,18 +74,18 @@ public class PlayerMove : MonoBehaviour
 
         #region GroundCheckerのイベント購読
         _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.6f);
-        _groundChecker.IsGrounded.Subscribe(value =>
-        {
-            // 着地判定を取ったら止まる
-            if (value) { _ySpeed = 0f; }
-            else { _isJumpInput = false; }
-        });
+        // IsGroundedがtrueに変わったとき = 着地したとき
+        _groundChecker.IsGrounded.Where(value => value).Subscribe(value => FinishedJump());
         #endregion
+    }
+
+    private void Start()
+    {
+        _currentGravity = _gravityAcceleration;
     }
 
     private void Update()
     {
-        // テスト用
         _groundChecker.Check(_transform.position);
 
         Vector2 moveDelta = Run() + Jump();
@@ -120,7 +121,10 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     public Vector2 Run()
     {
-        if (!_isMove) { return Vector2.zero; }
+        if (!_isMove)
+        {
+            return Vector2.zero;
+        }
 
         float speed = CalculateSpeed(ref _increasedSpeed);
         return _moveDir * speed;
@@ -139,20 +143,29 @@ public class PlayerMove : MonoBehaviour
             if (_isJumpInput)
             {
                 _ySpeed = _standardJumpPower;
+                _currentGravity = _gravityAcceleration;
             }
         }
         // 空中にいる
         else
         {
-            _ySpeed -= _gravityAcceleration;
+            _ySpeed -= _currentGravity;
 
             if (_ySpeed <= 0)
             {
-                _gravityAcceleration *= _gravityCoefficient;
+                _onlyOnce.Execution(() => _currentGravity *= _gravityCoefficient);
             }
         }
 
         return Vector2.up * _ySpeed;
+    }
+
+    private void FinishedJump()
+    {
+        // 着地判定を取ったら止まる
+        _ySpeed = 0f;
+        _onlyOnce.Reset();
+        _isJumpInput = false;
     }
 
     /// <summary>
@@ -166,7 +179,10 @@ public class PlayerMove : MonoBehaviour
         float limitSpeed = _standardSpeed * SPEED_LIMIT_COEFFICIENT;
 
         // 現在の速度が限界値を下回っている間、速度を増加させる
-        if (currentSpeed < limitSpeed) { previousSpeed += _speedIncreaseValue; }
+        if (currentSpeed < limitSpeed)
+        {
+            previousSpeed += _speedIncreaseValue;
+        }
 
         // 算出した最終速度（基本速度 + 増加速度）
         return _standardSpeed + previousSpeed;
