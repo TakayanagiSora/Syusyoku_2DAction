@@ -1,6 +1,4 @@
 
-namespace WeaponEnum
-{
     /// <summary>
     /// •Ší‚Ìí—Ş
     /// </summary>
@@ -11,4 +9,3 @@ namespace WeaponEnum
         /// </summary>
         normal,
     }
-}

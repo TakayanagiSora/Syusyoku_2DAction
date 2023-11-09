@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalWeapon : MonoBehaviour
+public class NormalWeapon : Weapon
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Bullet _razerPrefab = default;
+
+    private void Start()
     {
-        
+        NormalBullet.SetOrigin = _razerPrefab;
+        NormalBullet.InitialCreate(10);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Fire()
     {
-        
+        NormalBullet.Get(_transform.position, Quaternion.identity);
     }
 }

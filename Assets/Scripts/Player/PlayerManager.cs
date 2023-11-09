@@ -8,5 +8,5 @@ public class PlayerManager : MonoBehaviour
     private Transform _transform = default;
 
     private PlayerStatus _playerStatus = default;
-    private WeaponBase _equippedWeapon = default;
+    private Weapon _equippedWeapon = default;
 }
