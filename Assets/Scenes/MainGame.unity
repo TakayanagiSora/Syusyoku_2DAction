@@ -252,7 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e8883032924741ac701a0f00e1788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _razerPrefab: {fileID: 4172930758711059687, guid: fc7878f26ea821f499f58b8ea189524e, type: 3}
+  _maxChargeTime_s: 3
+  _razerPrefab: {fileID: 0}
 --- !u!95 &308249720
 Animator:
   serializedVersion: 5
