@@ -5,10 +5,12 @@ using System;
 
 public abstract class Bullet : PoolObject<Bullet>
 {
-    [SerializeField, Tooltip("基本速度")]
+    [SerializeField, Tooltip("基本速度"), Min(0)]
     protected float _speed = default;
-    [SerializeField, Tooltip("生存時間")]
+    [SerializeField, Tooltip("生存時間"), Min(0)]
     private float _lifeTime_s = default;
+    [SerializeField, Tooltip("攻撃力"), Min(0)]
+    private int _attackPower = default;
 
     protected Transform _transform = default;
 

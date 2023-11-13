@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8663014875905616919}
   - component: {fileID: 8682308362304277685}
-  - component: {fileID: 4172930758711059687}
+  - component: {fileID: -5837591186845993818}
   m_Layer: 0
   m_Name: ShotSample
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4172930758711059687
+--- !u!114 &-5837591186845993818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,5 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef78c2cf32199542b59cbea87005278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 8
   _lifeTime_s: 2
+  _attackPower: 0
