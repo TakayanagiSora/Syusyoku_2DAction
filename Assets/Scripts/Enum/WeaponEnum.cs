@@ -13,7 +13,7 @@ public enum WeaponType
 /// <summary>
 /// チャージ段階
 /// </summary>
-public enum ChargeStage
+public enum ChargeLevel
 {
     /// <summary>
     /// Small

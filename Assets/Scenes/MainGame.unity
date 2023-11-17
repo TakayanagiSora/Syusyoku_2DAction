@@ -253,7 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxChargeTime_s: 3
-  _razerPrefab: {fileID: 0}
+  _bulletPrefab_S: {fileID: 3158816285296251042, guid: fc7878f26ea821f499f58b8ea189524e, type: 3}
+  _bulletPrefab_M: {fileID: 4094264159610901186, guid: f65389b7105d9cb4d8fe956be3ebb4bc, type: 3}
+  _bulletPrefab_L: {fileID: 0}
+  _bulletInitialAmount: 10
 --- !u!95 &308249720
 Animator:
   serializedVersion: 5

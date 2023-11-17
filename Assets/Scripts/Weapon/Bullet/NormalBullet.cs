@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NormalBullet : Bullet
+public abstract class NormalBullet : Bullet
 {
     protected override void Move()
     {
