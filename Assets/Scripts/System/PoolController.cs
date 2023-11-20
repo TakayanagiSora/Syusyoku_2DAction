@@ -6,16 +6,18 @@ using System;
 public class PoolController : MonoBehaviour
 {
     [Serializable]
-    private class PoolData
+    public class PoolData
     {
-        public PoolUser _prefab = default;
+        public GameObject _prefab = default;
         public int _createAmount = default;
     }
 
     [SerializeField]
-    private List<PoolData> _poolData = new List<PoolData>();
+    private List<PoolData> _poolDataList = new List<PoolData>();
 
-    private Dictionary<string, Stack<PoolUser>> _objectPools = new Dictionary<string, Stack<PoolUser>>();
+    private Dictionary<string, Stack<GameObject>> _objectPools = new Dictionary<string, Stack<GameObject>>();
+
+    public List<PoolData> PoolDataList => _poolDataList;
 
 
     private void Awake()
@@ -25,19 +27,19 @@ public class PoolController : MonoBehaviour
 
     private void InitialCreate()
     {
-        for (int i = 0; i < _poolData.Count; i++)
+        for (int i = 0; i < _poolDataList.Count; i++)
         {
-            _objectPools.Add(_poolData[i]._prefab.gameObject.name, new Stack<PoolUser>());
+            _objectPools.Add(_poolDataList[i]._prefab.gameObject.name, new Stack<GameObject>());
 
-            for (int k = 0; k < _poolData[i]._createAmount; k++)
+            for (int k = 0; k < _poolDataList[i]._createAmount; k++)
             {
-                PoolUser obj = Instantiate(_poolData[i]._prefab);
+                GameObject obj = Instantiate(_poolDataList[i]._prefab);
                 //_objectPools[i].Push(obj);
             }
         }
     }
 
-    //public PoolUser Get(string key)
+    //public GameObject Get(string key)
     //{
     //    if (_objectPools.)
     //}

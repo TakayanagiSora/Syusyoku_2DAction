@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YouYouLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:YouYouLibrary.SortSearchSystem.Sort">
+            <summary>
+            This is a class that can perform sorting operations <br />
+            これはソートができる機能を兼ね備えたクラスです
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByArrangement_AscendingOrder_TypeStructOnly``1(``0[])">
+            <summary>
+            This is a function that sorts the given elements in ascending order,limited to value types <br />
+            これは渡された要素を値型限定で昇順に並べ替える機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <returns>Elements sorted in ascending order　<br />
+            昇順に並べ替えられた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByList_AscendingOrder_TypeStructOnly``1(System.Collections.Generic.List{``0})">
+            <summary>
+            This is a function that sorts the given elements in ascending order,limited to value types <br />
+            これは渡された要素を値型限定で昇順に並べ替える機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <returns>Elements sorted in ascending order　<br />
+            昇順に並べ替えられた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByArrangement_AscendingOrder``1(``0[])">
+            <summary>
+            This is a function that sorts the given elements in ascending order　<br />
+            これは渡された要素を昇順に並べ替える機能です　<br />
+            ※There may be unexpected results　<br />
+            ※予期しない結果になる場合があります
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <returns>Elements sorted in ascending order　<br />
+            昇順に並べ替えた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByList_AscendingOrder``1(System.Collections.Generic.List{``0})">
+            <summary>
+            This is a function that sorts the given elements in ascending order　<br />
+            これは渡された要素を昇順に並べ替える機能です　<br />
+            ※There may be unexpected results　<br />
+            ※予期しない結果になる場合があります
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <returns>Elements sorted in ascending order　<br />
+            昇順に並べ替えた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByArrangement_DescendingOrder_TypeStructOnly``1(``0[])">
+            <summary>
+            This is a function that sorts the given elements in descending order,limited to value types <br />
+            これは、渡された要素を値型限定で降順に並べ替える機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <returns>Elements sorted in descending order <br />
+            降順に並べ替えられた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByList_DescendingOrder_TypeStructOnly``1(System.Collections.Generic.List{``0})">
+            <summary>
+            This is a function that sorts the given elements in descending order,limited to value types <br />
+            これは、渡された要素を値型限定で降順に並べ替える機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <returns>Elements sorted in descending order <br />
+            降順に並べ替えられた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByArrangement_DescendingOrder``1(``0[])">
+            <summary>
+            This is a function that sorts the given elements in descending order <br />
+            これは、渡された要素を降順に並べ替える機能です <br />
+            ※There may be unexpected results <br />
+            ※予期しない結果になる場合があります
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <returns>Elements sorted in descending order　<br />
+            降順に並べ替えた要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Sort.SortByList_DescendingOrder``1(System.Collections.Generic.List{``0})">
+            <summary>
+            This is a function that sorts the given elements in descending order <br />
+            これは、渡された要素を降順に並べ替える機能です <br />
+            ※There may be unexpected results <br />
+            ※予期しない結果になる場合があります
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <returns>Elements sorted in descending order　<br />
+            降順に並べ替えた要素</returns>
+        </member>
+        <member name="T:YouYouLibrary.SortSearchSystem.Search">
+            <summary>
+            This is a class that can perform searching operations <br />
+            これは、サーチができる機能を兼ね備えたクラスです
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_Matchs``1(``0[],``0)">
+            <summary>
+            This is a function that retrieves all elements that match the given target <br />
+            これは、渡された対象に一致している要素を全て取得する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>Matching elements <br />
+            一致している要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_Matchs``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This is a function that retrieves all elements that match the given target <br />
+            これは、渡された対象に一致している要素を全て取得する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>Matching elements <br />
+            一致している要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_MatchStruct_TypeDescendingSearch``1(``0[],``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to value types,in descending order <br />
+            これは、渡された要素から探索対象を値型限定かつ要素の降順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            降順で最初に発見された要素の添え字</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_MatchStruct_TypeDescendingSearch``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to value types,in descending order <br />
+            これは、渡された要素から探索対象を値型限定かつ要素の降順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            降順で最初に発見された要素の添え字</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_MatchClass_TypeDescendingSearch``1(``0[],``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to reference types,in descending order <br />
+            これは、渡された要素から探索対象を参照型限定かつ要素の降順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            降順で最初に発見された要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_MatchClass_TypeDescendingSearch``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to reference types,in descending order <br />
+            これは、渡された要素から探索対象を参照型限定かつ要素の降順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            降順で最初に発見された要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_MatchStruct_TypeAscendingSearch``1(``0[],``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to value types,in ascending order <br />
+            これは、渡された要素から探索対象を値型限定かつ要素の昇順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            昇順で最初に発見された要素の添え字</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_MatchStruct_TypeAscendingSearch``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to value types,in ascending order <br />
+            これは、渡された要素から探索対象を値型限定かつ要素の昇順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            昇順で最初に発見された要素の添え字</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_MatchClass_TypeAscendingSearch``1(``0[],``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to reference types,in ascending order <br />
+            これは、渡された要素から探索対象を参照型限定かつ要素の昇順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            昇順で最初に発見された要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_MatchClass_TypeAscendingSearch``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This is a function that searches for a target within the given elements,limited to reference types,in ascending order <br />
+            これは、渡された要素から探索対象を参照型限定かつ要素の昇順で探索する機能です
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>The element first found in descending order <br />
+            昇順で最初に発見された要素</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByArrangement_MatchStruct_TypeDichotomySearch``1(``0[],``0)">
+            <summary>
+            This performs a target search using binary search<br />
+            これは、二分探索による対象の検索をします <br />
+            ※This is applicable only when the elements are sorted <br />
+            ※要素が整列されている場合に限り適用されます
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectArrangements"></param>
+            <param name="matchTarget"></param>
+            <returns>Matching index</returns>
+        </member>
+        <member name="M:YouYouLibrary.SortSearchSystem.Search.SearchByList_MatchStruct_TypeDichotomySearch``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            This performs a target search using binary search<br />
+            これは、二分探索による対象の検索をします <br />
+            ※This is applicable only when the elements are sorted <br />
+            ※要素が整列されている場合に限り適用されます
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subjectLists"></param>
+            <param name="matchTarget"></param>
+            <returns>Matching index</returns>
+        </member>
+        <member name="T:YouYouLibrary.CipherSystem.Cipher">
+            <summary>
+            暗号処理機能を備えたクラスです
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.CipherSystem.Cipher.Cipher_TypeA(System.String)">
+            <summary>
+            タイプAの暗号処理です　一部復元できない　
+            </summary>
+            <param name="plainText"></param>
+            <returns>暗号化された文字列</returns>
+        </member>
+        <member name="M:YouYouLibrary.CipherSystem.Cipher.Cipher_TypeB(System.String)">
+            <summary>
+            タイプBの暗号処理です　一部復号できない
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YouYouLibrary.CipherSystem.Cipher.Cipher_TypeC">
+            <summary>
+            タイプCの暗号処理です　推奨暗号化
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.CipherSystem.Cipher.Cipher_TypeC.Cipher_TypeC_Encryption(System.String)">
+            <summary>
+            暗号化　推奨
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YouYouLibrary.CipherSystem.Cipher.Cipher_TypeC.Cipher_TypeC_Decryption(System.String)">
+            <summary>
+            復号化　推奨
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YouYouLibrary.SaveSystem.SaveData">
+            <summary>
+            サンプルセーブデータです
+            </summary>
+        </member>
+        <member name="F:YouYouLibrary.SaveSystem.SaveData._saveData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:YouYouLibrary.SaveSystem.SaveSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.SaveSystem.SaveSystem.SaveEncryptedByDefault``1(``0,System.String)">
+            <summary>
+            セーブします　新規保存　デフォルト暗号化
+            </summary>
+            <param name="saveDatas">シリアライズしたクラスを代入してください</param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:YouYouLibrary.SaveSystem.SaveSystem.Save``1(``0,System.String)">
+            <summary>
+            セーブします 新規保存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="saveDatas">シリアライズ化したクラスを代入してください</param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:YouYouLibrary.SaveSystem.SaveSystem.DecryptSavesThatAreEncryptedByDefault``1(System.String)">
+            <summary>
+            ロードセーブ　デフォルト復号
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YouYouLibrary.SaveSystem.SaveSystem.LoadSave``1(System.String)">
+            <summary>
+            ロードセーブ
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YouYouLibrary.RandomSystem.RandomProbability">
+            <summary>
+            ランダム計算を行うクラス
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.RandomSystem.RandomProbability.ProbabilityCalculation``1(YouYouLibrary.RandomSystem.RandomCreator.RandomObject{``0}[])">
+            <summary>
+            ランダム計算を行う
+            </summary>
+            <typeparam name="T">要素</typeparam>
+            <param name="elements">要素</param>
+            <returns>結果</returns>
+        </member>
+        <member name="T:YouYouLibrary.RandomSystem.RandomCreator">
+            <summary>
+            ランダム要素を作成するクラス
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.RandomSystem.RandomCreator.RandomCreate``1(``0,System.Int32)">
+            <summary>
+            ランダムを生成する
+            </summary>
+            <typeparam name="T">要素</typeparam>
+            <param name="element">要素</param>
+            <param name="elementCount">要素数</param>
+            <returns>ランダムを集めたクラス</returns>
+        </member>
+        <member name="T:YouYouLibrary.RandomSystem.RandomCreator.RandomObject`1">
+            <summary>
+            ランダムの要素クラス
+            </summary>
+            <typeparam name="T">何をランダムの要素にするのか</typeparam>
+        </member>
+        <member name="F:YouYouLibrary.RandomSystem.RandomCreator.RandomObject`1.randomElement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:YouYouLibrary.RandomSystem.RandomCreator.RandomObject`1.percentage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:YouYouLibrary.ListSystem.List">
+            <summary>
+            リストクラス　（自作）オブジェクト指向として終わっているけど、楽したい人向け
+            </summary>
+        </member>
+        <member name="P:YouYouLibrary.ListSystem.List.Count">
+            <summary>
+            リストの要素数を取得する
+            </summary>
+        </member>
+        <member name="P:YouYouLibrary.ListSystem.List.Item(System.Int32)">
+            <summary>
+            リストの要素を取得する
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.Add``1(``0)">
+            <summary>
+            リストに要素を追加する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.Remove``1(``0)">
+            <summary>
+            リストから特定の要素を一つ削除する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.RemoveAllMatching``1(``0)">
+            <summary>
+            リストから特定の要素にマッチするものをすべて削除する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.Clear">
+            <summary>
+            リストをクリアする
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.FindElement``1(``0)">
+            <summary>
+            リストにあるか検索する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns>element</returns>
+        </member>
+        <member name="M:YouYouLibrary.ListSystem.List.FindElementAllMatching``1(``0)">
+            <summary>
+            検索したいものにヒットするリストの要素をすべて取得する
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns>elements</returns>
+        </member>
+        <member name="T:YouYouLibrary.ClassDesignSupportSystem.ClassDesign">
+            <summary>
+            クラス設計通りにプログラムが行われているか検査します。
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.ClassDesignSupportSystem.ClassDesign.Dependencies``2">
+            <summary>
+            T1 -- T2  委譲関係<br />
+            T2はT1に依存します。逆依存は認めません。
+            </summary>
+            <typeparam name="T1">dependent</typeparam>
+            <typeparam name="T2">holder</typeparam>
+        </member>
+        <member name="M:YouYouLibrary.ClassDesignSupportSystem.ClassDesign.InheritanceRelationship``2">
+            <summary>
+            T1＜|--T2  継承関係<br />
+            T2はT1を継承します
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="T:YouYouLibrary.ClassDesignSupportSystem.ClassDesignFailureException">
+            <summary>
+            クラス設計に失敗した場合のエラー処理
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.ClassDesignSupportSystem.ClassDesignFailureException.#ctor">
+            <summary>
+            通常例外
+            </summary>
+        </member>
+        <member name="M:YouYouLibrary.ClassDesignSupportSystem.ClassDesignFailureException.#ctor(System.String)">
+            <summary>
+            例外情報
+            </summary>
+            <param name="massage"></param>
+        </member>
+        <member name="M:YouYouLibrary.ClassDesignSupportSystem.ClassDesignFailureException.#ctor(System.String,System.Exception)">
+            <summary>
+            例外詳細情報
+            </summary>
+            <param name="massage"></param>
+            <param name="innerException"></param>
+        </member>
+    </members>
+</doc>
