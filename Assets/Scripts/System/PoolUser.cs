@@ -12,9 +12,13 @@ public abstract class PoolUser : MonoBehaviour
 [Serializable]
 public class UsePoolObject
 {
+    // EditorƒNƒ‰ƒX‚©‚çSet‚³‚ê‚é
+    // -------------------------------------------------------------
     [SerializeField]
     private string _name = default;
     [SerializeField]
     private int _arrayIndex = default;
+    // -------------------------------------------------------------
+
     public string Name => _name;
 }
