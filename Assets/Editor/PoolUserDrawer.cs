@@ -18,31 +18,27 @@ public class PoolUserDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        using (new EditorGUI.PropertyScope(position, label, property))
+        // 保存されているデータを取り出す（デシリアライズ）
+        // ------------------------------------------------------------------------------------------------------------------
+        // 詳しい原因調査のため勉強中だが、おそらくUnityの仕様上PropertyDrawerを継承したクラスでのSerializable属性が非対応のため、
+        // 別ファイルに書き込む形でシリアライズ化している
+        _selectablePoolObject = SaveSystem.LoadSave<SelectablePoolObject>(ARRAY_FILE_NAME);
+        // ------------------------------------------------------------------------------------------------------------------
+
+        if (_selectablePoolObject._names.Count == 0)
         {
-            // 保存されているデータを取り出す（デシリアライズ）
-            // ------------------------------------------------------------------------------------------------------------------
-            // 詳しい原因調査のため勉強中だが、おそらくUnityの仕様上PropertyDrawerを継承したクラスのシリアライズ化が非対応のため、
-            // 別ファイルに書き込む形でシリアライズ化している
-            _selectablePoolObject = SaveSystem.LoadSave<SelectablePoolObject>(ARRAY_FILE_NAME);
-            // ------------------------------------------------------------------------------------------------------------------
-
-            if (_selectablePoolObject._names.Count == 0)
-            {
-                return;
-            }
-
-
-            // 選択可能なプールオブジェクトリストをポップアップ表示し、拡張先のプロパティに代入
-            // ------------------------------------------------------------------------------------------------------------------
-            // 選択可能なプールオブジェクトリストは、PoolControllerクラスのInspectorが変更されたタイミングで更新される
-            var usePoolObjectName = property.FindPropertyRelative("_name");
-            var usePoolObjectIndex = property.FindPropertyRelative("_arrayIndex");
-            usePoolObjectIndex.intValue = EditorGUI.Popup(position, "UsePoolObjectName", usePoolObjectIndex.intValue, _selectablePoolObject._names.ToArray());
-
-            usePoolObjectName.stringValue = _selectablePoolObject._names[usePoolObjectIndex.intValue];
-            // ------------------------------------------------------------------------------------------------------------------
+            return;
         }
+
+        // 選択可能なプールオブジェクトリストをポップアップ表示し、拡張先のプロパティに代入
+        // ------------------------------------------------------------------------------------------------------------------
+        // 選択可能なプールオブジェクトリストは、PoolControllerクラスのInspectorが変更されたタイミングで更新される
+        var usePoolObjectName = property.FindPropertyRelative("_name");
+        var usePoolObjectIndex = property.FindPropertyRelative("_arrayIndex");
+        usePoolObjectIndex.intValue = EditorGUI.Popup(position, "UsePoolObjectName", usePoolObjectIndex.intValue, _selectablePoolObject._names.ToArray());
+
+        usePoolObjectName.stringValue = _selectablePoolObject._names[usePoolObjectIndex.intValue];
+        // ------------------------------------------------------------------------------------------------------------------
     }
 
     /// <summary>
