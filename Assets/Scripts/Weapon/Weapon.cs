@@ -6,6 +6,7 @@ using UniRx;
 public abstract class Weapon : MonoBehaviour
 {
     protected Transform _transform = default;
+    protected PoolController _poolController = default;
     protected WeaponType _myWeaponType;
     [Tooltip("チャージされた時間")]
     protected float _chargedTime_s = 0f;
@@ -15,6 +16,7 @@ public abstract class Weapon : MonoBehaviour
     private float _maxChargeTime_s = default;
 
     private GameInputs _gameInputs = default;
+
     [Tooltip("チャージ中ならtrue")]
     private bool _isCharging = false;
     private OnlyOnce _onlyOnce_ChargeM = new OnlyOnce();
@@ -28,10 +30,10 @@ public abstract class Weapon : MonoBehaviour
     private void Awake()
     {
         _transform = this.transform;
+        _poolController = FindObjectOfType<PoolController>();
 
         _gameInputs = new GameInputs();
         _gameInputs.Enable();
-
         _gameInputs.Player.Fire.started += OnCharge;
         _gameInputs.Player.Fire.canceled += OnFire;
     }
