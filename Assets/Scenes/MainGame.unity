@@ -254,10 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxChargeTime_s: 3
-  _bulletPrefab_S: {fileID: 3158816285296251042, guid: fc7878f26ea821f499f58b8ea189524e, type: 3}
-  _bulletPrefab_M: {fileID: 4094264159610901186, guid: f65389b7105d9cb4d8fe956be3ebb4bc, type: 3}
-  _bulletPrefab_L: {fileID: 0}
-  _bulletInitialAmount: 10
+  _normalBullet: {fileID: 308249721}
 --- !u!95 &308249720
 Animator:
   serializedVersion: 5
@@ -288,16 +285,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 308249714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c16c7e913fdc74bb19d813f8ce746e, type: 3}
+  m_Script: {fileID: 11500000, guid: 77392cad50a8a2d4eb11063c83037d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _usePoolObjectNames:
-  - _name: ObjectSample1
+  _key:
+    _name: ShotSample
     _arrayIndex: 0
-  - _name: ObjectSample2
-    _arrayIndex: 1
-  - _name: '[NULL]'
-    _arrayIndex: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +524,7 @@ GameObject:
   - component: {fileID: 1336462909}
   - component: {fileID: 1336462908}
   m_Layer: 0
-  m_Name: testpool
+  m_Name: PoolController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,12 +543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolDataList:
-  - _prefab: {fileID: 2606860355246501546, guid: 71a2a417b47a81243ad31172db4012f9, type: 3}
-    _createAmount: 0
-  - _prefab: {fileID: 2606860355246501546, guid: 028b9b0c63bf0164aaccf2241bed7a35, type: 3}
-    _createAmount: 0
-  - _prefab: {fileID: 0}
-    _createAmount: 0
+  - _prefab: {fileID: 1845477791441179557, guid: fc7878f26ea821f499f58b8ea189524e, type: 3}
+    _createAmount: 10
 --- !u!4 &1336462909
 Transform:
   m_ObjectHideFlags: 0
@@ -565,7 +554,7 @@ Transform:
   m_GameObject: {fileID: 1336462907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.52897, y: -4.793743, z: -2.8080246}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

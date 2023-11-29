@@ -1,12 +1,12 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 
-public abstract class PoolUser : MonoBehaviour
+public class PoolUser : MonoBehaviour
 {
     [SerializeField]
-    private List<UsePoolObject> _usePoolObjectNames = new List<UsePoolObject>();
-    protected List<UsePoolObject> UsePoolObjectNames => _usePoolObjectNames;
+    private UsePoolObject _key = new UsePoolObject();
+
+    public string Key => _key.Name;
 }
 
 [Serializable]

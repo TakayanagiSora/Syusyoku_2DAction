@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
 
-public abstract class Bullet : PoolObject<Bullet>
+public abstract class Bullet : PoolObject
 {
     [SerializeField, Tooltip("Šî–{‘¬“x"), Min(0)]
     protected float _speed = default;
@@ -13,6 +13,7 @@ public abstract class Bullet : PoolObject<Bullet>
     private int _attackPower = default;
 
     protected Transform _transform = default;
+    private PoolController _poolController = default;
 
     private CancellationTokenSource _cts = default;
 
@@ -20,6 +21,7 @@ public abstract class Bullet : PoolObject<Bullet>
     private void Awake()
     {
         _transform = this.transform;
+        _poolController = FindObjectOfType<PoolController>();
     }
 
     private void Update()
@@ -27,7 +29,7 @@ public abstract class Bullet : PoolObject<Bullet>
         Move();
     }
 
-    protected async override void Enable(Vector2 spawnPos, Quaternion spawnDir)
+    public override async void Enable(Vector2 spawnPos, Quaternion spawnDir)
     {
         _transform.position = spawnPos;
         _transform.rotation = spawnDir;
@@ -44,7 +46,7 @@ public abstract class Bullet : PoolObject<Bullet>
         }
     }
 
-    protected override void Disable()
+    public override void Disable()
     {
         _cts = null;
         this.gameObject.SetActive(false);
@@ -58,7 +60,7 @@ public abstract class Bullet : PoolObject<Bullet>
     private async UniTask LifeTimeAsync(CancellationToken token)
     {
         await UniTask.WaitForSeconds(_lifeTime_s, cancellationToken: token);
-        Return(this);
+        _poolController.Return(this);
     }
 
     /// <summary>
