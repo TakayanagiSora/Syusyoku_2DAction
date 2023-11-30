@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class NormalBullet : Bullet
 {
+    private Vector2 _direction = Vector2.right;
+
     protected override void Move()
     {
-        _transform.Translate(Vector2.up * _speed * Time.deltaTime);
+        _transform.Translate(_direction * _speed * Time.deltaTime);
     }
 }

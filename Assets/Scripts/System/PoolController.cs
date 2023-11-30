@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// オブジェクトプールの管理クラス
+/// </summary>
 public class PoolController : MonoBehaviour
 {
     [Serializable]
@@ -53,6 +56,7 @@ public class PoolController : MonoBehaviour
             Stack<PoolObject> stack = new Stack<PoolObject>();
             // キーをオブジェクト名、値をスタックとした連想配列の要素を追加
             _objectPools.Add(key, stack);
+            // キーをスタック、値をリストのインデックスとした連想配列の要素を追加
             _poolIndices.Add(stack, i);
 
             // 設定された当該要素の生成数分繰り返し、インスタンスを生成する
