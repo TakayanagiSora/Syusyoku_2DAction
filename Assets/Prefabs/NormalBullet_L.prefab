@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8172768378317599883}
   - component: {fileID: 4558214391370925834}
   - component: {fileID: 753928241225326164}
+  - component: {fileID: 6143947270299508017}
   - component: {fileID: -3487809004925097873}
   m_Layer: 0
   m_Name: NormalBullet_L
@@ -107,6 +108,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &6143947270299508017
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864079372406102277}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04425983, y: -0.021617154}
+  m_Size: {x: 0.861487, y: 0.31666464}
+  m_Direction: 1
 --- !u!114 &-3487809004925097873
 MonoBehaviour:
   m_ObjectHideFlags: 0
