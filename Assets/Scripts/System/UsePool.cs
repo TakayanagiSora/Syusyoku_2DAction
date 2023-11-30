@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class PoolUser : MonoBehaviour
+public class UsePool : MonoBehaviour
 {
     [SerializeField]
     private UsePoolObject _key = new UsePoolObject();

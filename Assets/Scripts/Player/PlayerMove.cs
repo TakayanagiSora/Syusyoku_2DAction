@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         #endregion
 
         #region GroundCheckerのイベント購読
-        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.6f);
+        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 1f);
         // IsGroundedがtrueに変わったとき = 着地したとき
         _groundChecker.IsGrounded.Where(value => value).Subscribe(value => FinishedJump());
         #endregion

@@ -3,9 +3,10 @@ using UnityEngine;
 /// <summary>
 /// プール化対象オブジェクトの基底クラス
 /// </summary>
-/// <typeparam name="T"></typeparam>
 public abstract class PoolObject : MonoBehaviour
 {
+    protected PoolController _poolController = default;
+
     /// <summary>
     /// Get時の初期化処理
     /// <br>- SetActiveも記述すること</br>
