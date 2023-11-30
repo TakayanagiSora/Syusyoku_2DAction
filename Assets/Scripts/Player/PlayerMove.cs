@@ -90,6 +90,8 @@ public class PlayerMove : MonoBehaviour
 
         Vector2 moveDelta = Run() + Jump();
         _transform.Translate(moveDelta * Time.deltaTime);
+
+        print(_currentGravity);
     }
 
     private void OnDisable()

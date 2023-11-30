@@ -38,6 +38,7 @@ public abstract class Bullet : PoolObject
 
     public override async void Enable(Vector2 spawnPos, Quaternion spawnDir)
     {
+        // 初期化
         _transform.position = spawnPos;
         _transform.rotation = spawnDir;
         this.gameObject.SetActive(true);
@@ -49,7 +50,7 @@ public abstract class Bullet : PoolObject
         }
         catch (OperationCanceledException)
         {
-            Debug.Log("弾がキャンセルして消滅した場合の例外処理");
+            // キャンセルされた場合、即座に消滅させる
             _poolController.Return(this);
         }
     }
@@ -71,11 +72,15 @@ public abstract class Bullet : PoolObject
         _poolController.Return(this);
     }
 
+    /// <summary>
+    /// 当たり判定を取得し、ダメージを与える処理
+    /// </summary>
     private void CheckCollision()
     {
         // 当たり判定を取得
         int count = Physics2D.OverlapCapsuleNonAlloc(_transform.position, _collider.size, _collider.direction, 0f, _hitColliders, ENEMY_LAYER);
 
+        // 取得したコライダーのオブジェクトにダメージを与える
         for (int i = 0; i < count; i++)
         {
             if (_hitColliders[i].TryGetComponent(out IDamagable damagable))
