@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         #endregion
 
         #region GroundCheckerのイベント購読
-        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 1f);
+        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.01f);
         // IsGroundedがtrueに変わったとき = 着地したとき
         _groundChecker.IsGrounded.Where(value => value).Subscribe(value => FinishedJump());
         #endregion
@@ -86,7 +86,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        _groundChecker.Check(_transform.position);
+        // 中心座標が(0, 0)、LocalScaleが3のときは(0, -1.5)を原点とする
+        Vector2 origin = new Vector2(_transform.position.x, _transform.position.y - _transform.localScale.z / 2);
+        _groundChecker.Check(origin);
 
         Vector2 moveDelta = Run() + Jump();
         _transform.Translate(moveDelta * Time.deltaTime);
