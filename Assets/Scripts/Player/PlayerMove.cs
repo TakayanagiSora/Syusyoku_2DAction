@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Cysharp.Threading.Tasks;
 using UniRx;
-using System;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -28,12 +26,12 @@ public class PlayerMove : MonoBehaviour
     private const float SPEED_LIMIT_COEFFICIENT = 3.0f;
     #endregion
 
-    #region Jumo変数
+    #region Jump変数
     [Header("Jump変数")]
     [SerializeField, Tooltip("プレイヤーの基本ジャンプ力")]
     private float _standardJumpPower = default;
     [SerializeField, Tooltip("重力加速度")]
-    private float _gravityAcceleration = default;
+    private float _gravityAcceleration_BySecond = default;
     [SerializeField, Tooltip("重力上昇係数")]
     private float _gravityCoefficient = default;
     [Tooltip("現在の重力")]
@@ -73,7 +71,7 @@ public class PlayerMove : MonoBehaviour
         #endregion
 
         #region GroundCheckerのイベント購読
-        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.01f);
+        _groundChecker = new GroundChecker(direction: Vector2.down, distance: 0.1f);
         // IsGroundedがtrueに変わったとき = 着地したとき
         _groundChecker.IsGrounded.Where(value => value).Subscribe(value => FinishedJump());
         #endregion
@@ -81,7 +79,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        _currentGravity = _gravityAcceleration;
+        _currentGravity = _gravityAcceleration_BySecond;
     }
 
     private void Update()
@@ -92,8 +90,6 @@ public class PlayerMove : MonoBehaviour
 
         Vector2 moveDelta = Run() + Jump();
         _transform.Translate(moveDelta * Time.deltaTime);
-
-        print(_currentGravity);
     }
 
     private void OnDisable()
@@ -136,7 +132,6 @@ public class PlayerMove : MonoBehaviour
 
     /// <summary>
     /// 上下方向のベクトルを算出
-    /// <br>- ボタンの入力時間に応じて「大ジャンプ」と「小ジャンプ」に分岐する</br>
     /// </summary>
     public Vector2 Jump()
     {
@@ -147,15 +142,15 @@ public class PlayerMove : MonoBehaviour
             if (_isJumpInput)
             {
                 _ySpeed = _standardJumpPower;
-                _currentGravity = _gravityAcceleration;
+                _currentGravity = _gravityAcceleration_BySecond;
             }
         }
         // 空中にいる
         else
         {
-            _ySpeed -= _currentGravity;
+            _ySpeed -= _currentGravity * Time.deltaTime;
 
-            if (_ySpeed <= 0)
+            if (_ySpeed <= 0f)
             {
                 _onlyOnce.Execution(() => _currentGravity *= _gravityCoefficient);
             }
