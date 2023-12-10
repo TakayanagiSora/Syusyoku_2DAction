@@ -13,6 +13,9 @@ public abstract class Bullet : PoolObject
     private int _attackPower = default;
 
     protected Transform _transform = default;
+    [Tooltip("当たり判定を取る対象のレイヤー")]
+    // 初期EnemyLayer
+    protected int _targetLayer = 1 << 7;
 
     private CancellationTokenSource _cts = default;
     private CapsuleCollider2D _collider = default;
@@ -20,10 +23,9 @@ public abstract class Bullet : PoolObject
     // Overlap-NonAlloc関数で使用。GC頻度を下げるため、配列をあらかじめ作成
     // 暗示的に「ヒットしたすべてのコライダーを格納」としたいため、十分な数を確保
     private Collider2D[] _hitColliders = new Collider2D[16];
-    private const int ENEMY_LAYER = 1 << 7;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _transform = this.transform;
         _collider = this.GetComponent<CapsuleCollider2D>();
@@ -78,7 +80,7 @@ public abstract class Bullet : PoolObject
     private void CheckCollision()
     {
         // 当たり判定を取得
-        int count = Physics2D.OverlapCapsuleNonAlloc(_transform.position, _collider.size, _collider.direction, 0f, _hitColliders, ENEMY_LAYER);
+        int count = Physics2D.OverlapCapsuleNonAlloc(_transform.position, _collider.size, _collider.direction, 0f, _hitColliders, _targetLayer);
 
         // 取得したコライダーのオブジェクトにダメージを与える
         for (int i = 0; i < count; i++)
