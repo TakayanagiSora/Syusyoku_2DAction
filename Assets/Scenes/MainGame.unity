@@ -857,6 +857,12 @@ MonoBehaviour:
     _createAmount: 10
   - _prefab: {fileID: 8937120409627127872, guid: 560d3da7971f8ba4e8112a85e7193490, type: 3}
     _createAmount: 10
+  - _prefab: {fileID: 3764458238559132319, guid: 7733f9674e952314693e5dc849fc40ab, type: 3}
+    _createAmount: 10
+  - _prefab: {fileID: 3697493373175978755, guid: a0e3107f82e3d9340b258c4edc826a13, type: 3}
+    _createAmount: 10
+  - _prefab: {fileID: 5039583380914000846, guid: 68a254709eeda1542a6f8affa9d66781, type: 3}
+    _createAmount: 10
 --- !u!4 &1336462909
 Transform:
   m_ObjectHideFlags: 0

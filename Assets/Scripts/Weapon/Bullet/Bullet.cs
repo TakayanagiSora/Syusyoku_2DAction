@@ -2,6 +2,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
+using UniRx;
 
 public abstract class Bullet : PoolObject
 {
@@ -23,6 +24,9 @@ public abstract class Bullet : PoolObject
     // Overlap-NonAlloc関数で使用。GC頻度を下げるため、配列をあらかじめ作成
     // 暗示的に「ヒットしたすべてのコライダーを格納」としたいため、十分な数を確保
     private Collider2D[] _hitColliders = new Collider2D[16];
+
+    private Subject<Vector2> _hitSubject = new Subject<Vector2>();
+    public IObservable<Vector2> OnHitBullet => _hitSubject;
 
 
     protected virtual void Awake()
@@ -89,6 +93,7 @@ public abstract class Bullet : PoolObject
             {
                 damagable.TakeDamage(_attackPower);
                 _cts.Cancel();
+                _hitSubject.OnNext(_transform.position);
             }
         }
     }

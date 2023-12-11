@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 776521886355438741}
   - component: {fileID: -3333897125546796822}
   - component: {fileID: -5046678144151923670}
+  - component: {fileID: 5503321141038521820}
+  - component: {fileID: 4135694424827304505}
   m_Layer: 0
   m_Name: NormalBullet_S
   m_TagString: Untagged
@@ -158,3 +160,31 @@ MonoBehaviour:
   _speed: 8
   _lifeTime_s: 2
   _attackPower: 0
+--- !u!114 &5503321141038521820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392746379551189073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8e01f6b2bf13341a9e8a75fc6382f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reaction_S: {fileID: 4135694424827304505}
+--- !u!114 &4135694424827304505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392746379551189073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77392cad50a8a2d4eb11063c83037d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _key:
+    _name: Bullet_S_Reaction
+    _arrayIndex: 4
