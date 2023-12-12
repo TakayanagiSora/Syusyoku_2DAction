@@ -10,7 +10,9 @@ public abstract class Weapon : MonoBehaviour
     protected WeaponType _myWeaponType;
     [Tooltip("チャージされた時間")]
     protected float _chargedTime_s = 0f;
-    protected ChargeLevel _chargeLevel = ChargeLevel.S;
+
+    protected ReactiveProperty<ChargeLevel> _chargeLevel = new ReactiveProperty<ChargeLevel>();
+    public IReadOnlyReactiveProperty<ChargeLevel> ChargeLevel => _chargeLevel;
 
     [SerializeField, Tooltip("最大チャージ時間"), Min(0)]
     private float _maxChargeTime_s = default;
@@ -36,6 +38,9 @@ public abstract class Weapon : MonoBehaviour
         _gameInputs.Enable();
         _gameInputs.Player.Fire.started += OnCharge;
         _gameInputs.Player.Fire.canceled += OnFire;
+
+        // 初期化
+        _chargeLevel.Value = global::ChargeLevel.None;
     }
 
     private void OnDisable()
@@ -46,7 +51,7 @@ public abstract class Weapon : MonoBehaviour
 
     private async void OnCharge(InputAction.CallbackContext context)
     {
-        _chargeLevel = ChargeLevel.S;
+        _chargeLevel.Value = global::ChargeLevel.S;
         _isCharging = true;
         await ChargeAsync();
     }
@@ -54,9 +59,10 @@ public abstract class Weapon : MonoBehaviour
     private void OnFire(InputAction.CallbackContext context)
     {
         _isCharging = false;
-        Fire(_chargeLevel);
+        Fire(_chargeLevel.Value);
 
         _chargedTime_s = 0f;
+        _chargeLevel.Value = global::ChargeLevel.None;
         _onlyOnce_ChargeM.Reset();
         _onlyOnce_ChargeL.Reset();
     }
@@ -83,12 +89,12 @@ public abstract class Weapon : MonoBehaviour
         // (1.5s <= チャージ時間 < 3s)
         if (_chargedTime_s >= _maxChargeTime_s / 2 && _chargedTime_s < _maxChargeTime_s)
         {
-            _onlyOnce_ChargeM.Execution(() => _chargeLevel = ChargeLevel.M);
+            _onlyOnce_ChargeM.Execution(() => _chargeLevel.Value = global::ChargeLevel.M);
         }
         // 最大チャージ時間以上のとき「L」
         else if (_chargedTime_s >= _maxChargeTime_s)
         {
-            _onlyOnce_ChargeL.Execution(() => _chargeLevel = ChargeLevel.L);
+            _onlyOnce_ChargeL.Execution(() => _chargeLevel.Value = global::ChargeLevel.L);
         }
     }
 

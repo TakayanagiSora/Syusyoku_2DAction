@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class EnemyAction_ShootsBullet : EnemyActionBase
 {
+    [SerializeField, Tooltip("UŒ‚ŠÔŠu"), Min(0)]
+    private float _attackInterval = default;
     [SerializeField, Tooltip("ãŒÀˆÚ“®—Ê"), Min(0)]
     private float _moveLimit = default;
     [SerializeField]
@@ -17,6 +19,7 @@ public class EnemyAction_ShootsBullet : EnemyActionBase
     [Tooltip("ã•ûŒü‚Ö‚ÌˆÚ“®‚ª‰Â”\")]
     private bool _canMoveUp = true;
     private PoolController _poolController = default;
+    private CancellationTokenSource _atk_cts;
 
     private readonly Vector2 _upDir = Vector2.up;
     private readonly Vector2 _downDir = Vector2.down;
@@ -28,7 +31,7 @@ public class EnemyAction_ShootsBullet : EnemyActionBase
         _poolController = FindObjectOfType<PoolController>();
     }
 
-    public override async UniTask Attack(CancellationToken token)
+    private async UniTask Attack(CancellationToken token)
     {
         while (true)
         {

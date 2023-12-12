@@ -16,6 +16,10 @@ public enum WeaponType
 public enum ChargeLevel
 {
     /// <summary>
+    /// ”ñƒ`ƒƒ[ƒWó‘Ô
+    /// </summary>
+    None,
+    /// <summary>
     /// Small
     /// </summary>
     S, 
@@ -26,5 +30,5 @@ public enum ChargeLevel
     /// <summary>
     /// Large
     /// </summary>
-    L
+    L,
 }
