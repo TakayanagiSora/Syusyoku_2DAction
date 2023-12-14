@@ -554,8 +554,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyActions:
-  - {fileID: 696340955}
   - {fileID: 696340951}
+  - {fileID: 696340955}
 --- !u!114 &696340953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,11 +1707,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1776122227130427664, guid: 672e42114c6260d4685ba36f8c4a8d22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.68
       objectReference: {fileID: 0}
     - target: {fileID: 1776122227130427664, guid: 672e42114c6260d4685ba36f8c4a8d22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.67
       objectReference: {fileID: 0}
     - target: {fileID: 1776122227130427664, guid: 672e42114c6260d4685ba36f8c4a8d22, type: 3}
       propertyPath: m_LocalPosition.z
