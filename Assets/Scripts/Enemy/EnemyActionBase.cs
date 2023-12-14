@@ -1,6 +1,4 @@
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System.Threading;
 
 public abstract class EnemyActionBase : MonoBehaviour
 {
