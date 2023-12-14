@@ -37,14 +37,6 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("現在の重力")]
     private float _currentGravity = default;
 
-    // ジャンプの前半後半でジャンプ力の増加量を分ける--------------
-    // => 初速が高く、空中で減速するようなジャンプ
-    //[SerializeField, Tooltip("前半のジャンプ力増加値")]
-    //private float _jumpPowerIncreaseValue_AtFirst = default;
-    //[SerializeField, Tooltip("後半のジャンプ力増加値")]
-    //private float _jumpPowerIncreaseValue_AtLast = default;
-    // ------------------------------------------------------------
-
     [Tooltip("上下方向の速度")]
     private float _ySpeed = default;
     [Tooltip("ジャンプ入力があったらtrueを返す")]
