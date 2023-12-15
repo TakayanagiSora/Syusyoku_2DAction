@@ -61,12 +61,17 @@ public abstract class Weapon : MonoBehaviour
         _isCharging = false;
         Fire(_chargeLevel.Value);
 
+        // ‰Šú‰»
         _chargedTime_s = 0f;
         _chargeLevel.Value = global::ChargeLevel.None;
         _onlyOnce_ChargeM.Reset();
         _onlyOnce_ChargeL.Reset();
     }
 
+    /// <summary>
+    /// ”ñ“¯Šú‚Åƒ`ƒƒ[ƒW‚ğ”»’è
+    /// </summary>
+    /// <returns></returns>
     private async UniTask ChargeAsync()
     {
         while (_isCharging)
