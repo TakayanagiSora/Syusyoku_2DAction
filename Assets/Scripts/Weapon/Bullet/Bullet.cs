@@ -49,6 +49,7 @@ public abstract class Bullet : PoolObject
         _transform.rotation = spawnDir;
         this.gameObject.SetActive(true);
 
+        // CancellationTokenを生成し、await処理を呼び出す
         _cts = new CancellationTokenSource();
         try
         {
@@ -63,6 +64,7 @@ public abstract class Bullet : PoolObject
 
     public override void Disable()
     {
+        // 使用済みのCancellationTokenをGC対象にする
         _cts = null;
         this.gameObject.SetActive(false);
     }
@@ -70,8 +72,6 @@ public abstract class Bullet : PoolObject
     /// <summary>
     /// 生存時間を非同期で計測し、消滅させる
     /// </summary>
-    /// <param name="token"></param>
-    /// <returns></returns>
     private async UniTask LifeTimeAsync(CancellationToken token)
     {
         await UniTask.WaitForSeconds(_lifeTime_s, cancellationToken: token);
