@@ -1,7 +1,5 @@
 using Cysharp.Threading.Tasks;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyAction_Summon : EnemyActionBase
@@ -28,7 +26,7 @@ public class EnemyAction_Summon : EnemyActionBase
 
     public override async void Enable()
     {
-        await Attack();
+        await Summon();
     }
 
     public override void Move()
@@ -36,8 +34,13 @@ public class EnemyAction_Summon : EnemyActionBase
 
     }
 
-    private async UniTask Attack()
+    /// <summary>
+    /// G‹›iƒhƒ[ƒ“j‚ğ¢Š«‚·‚é
+    /// </summary>
+    /// <returns></returns>
+    private async UniTask Summon()
     {
+        // “o˜^‚³‚ê‚Ä‚¢‚éSpawnPoint‚Ì”‚¾‚¯G‹›‚ğ¢Š«
         for (int i = 0; i < _spawnPoints.Count; i++)
         {
             _poolController.Get(_mob.Key, _spawnPoints[i].position, Quaternion.identity);

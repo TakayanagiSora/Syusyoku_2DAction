@@ -11,9 +11,6 @@ public abstract class Weapon : MonoBehaviour
     [Tooltip("チャージされた時間")]
     protected float _chargedTime_s = 0f;
 
-    protected ReactiveProperty<ChargeLevel> _chargeLevel = new ReactiveProperty<ChargeLevel>();
-    public IReadOnlyReactiveProperty<ChargeLevel> ChargeLevel => _chargeLevel;
-
     [SerializeField, Tooltip("最大チャージ時間"), Min(0)]
     private float _maxChargeTime_s = default;
 
@@ -23,6 +20,9 @@ public abstract class Weapon : MonoBehaviour
     private bool _isCharging = false;
     private OnlyOnce _onlyOnce_ChargeM = new OnlyOnce();
     private OnlyOnce _onlyOnce_ChargeL = new OnlyOnce();
+
+    private ReactiveProperty<ChargeLevel> _chargeLevel = new ReactiveProperty<ChargeLevel>();
+    public IReadOnlyReactiveProperty<ChargeLevel> ChargeLevel => _chargeLevel;
 
     private void OnEnable()
     {
@@ -94,12 +94,14 @@ public abstract class Weapon : MonoBehaviour
         // (1.5s <= チャージ時間 < 3s)
         if (_chargedTime_s >= _maxChargeTime_s / 2 && _chargedTime_s < _maxChargeTime_s)
         {
-            _onlyOnce_ChargeM.Execution(() => _chargeLevel.Value = global::ChargeLevel.M);
+            _onlyOnce_ChargeM.Execution(
+                () => _chargeLevel.Value = global::ChargeLevel.M);
         }
         // 最大チャージ時間以上のとき「L」
         else if (_chargedTime_s >= _maxChargeTime_s)
         {
-            _onlyOnce_ChargeL.Execution(() => _chargeLevel.Value = global::ChargeLevel.L);
+            _onlyOnce_ChargeL.Execution(
+                () => _chargeLevel.Value = global::ChargeLevel.L);
         }
     }
 
