@@ -69,7 +69,7 @@ public class EnemyAction_ShootsBullet : EnemyActionBase
 
     public override void Disable()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     /// <summary>

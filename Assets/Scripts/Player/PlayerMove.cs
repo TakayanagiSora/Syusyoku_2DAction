@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         _transform = this.transform;
 
         #region InputSystem‚ÌƒCƒxƒ“ƒgw“Ç
-        _gameInputs = new();
+        _gameInputs = new GameInputs();
         _gameInputs.Enable();
 
         _gameInputs.Player.Move.performed += OnMove;
