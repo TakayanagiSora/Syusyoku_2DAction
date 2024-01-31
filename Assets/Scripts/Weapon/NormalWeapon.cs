@@ -13,15 +13,15 @@ public class NormalWeapon : Weapon
     {
         switch (chargeStage)
         {
-            case global::ChargeLevel.S:
+            case global::ChargeLevel.Small:
                 _poolController.Get(_normalBullet_S.Key, _transform.position, Quaternion.identity);
                 break;
 
-            case global::ChargeLevel.M:
+            case global::ChargeLevel.Medium:
                 _poolController.Get(_normalBullet_M.Key, _transform.position, Quaternion.identity);
                 break;
 
-            case global::ChargeLevel.L:
+            case global::ChargeLevel.Large:
                 _poolController.Get(_normalBullet_L.Key, _transform.position, Quaternion.identity);
                 break;
         }

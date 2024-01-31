@@ -40,18 +40,18 @@ public class ChargeEffect_Normal : MonoBehaviour
     {
         switch (chargeLevel)
         {
-            case ChargeLevel.S:
+            case ChargeLevel.Small:
                 _animator.SetFloat(_speedHash, _animationSpeed_Level_S);
                 _transform.localScale = _scale;
                 _spriteRenderer.enabled = true;
                 break;
 
-            case ChargeLevel.M:
+            case ChargeLevel.Medium:
                 _animator.SetFloat(_speedHash, _animationSpeed_Level_M);
                 _transform.localScale = _scale * 1.5f;
                 break;
 
-            case ChargeLevel.L:
+            case ChargeLevel.Large:
                 _animator.SetFloat(_speedHash, _animationSpeed_Level_L);
                 _transform.localScale = _scale * 2f;
                 break;

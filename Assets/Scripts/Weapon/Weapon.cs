@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
 using UniRx;
 
+/// <summary>
+/// 武器の基底システム
+/// </summary>
 public abstract class Weapon : MonoBehaviour
 {
     protected Transform _transform = default;
@@ -12,14 +15,14 @@ public abstract class Weapon : MonoBehaviour
     protected float _chargedTime_s = 0f;
 
     [SerializeField, Tooltip("最大チャージ時間"), Min(0)]
-    private float _maxChargeTime_s = default;
+    private float _maxChargeTimeSec = default;
 
     private GameInputs _gameInputs = default;
 
     [Tooltip("チャージ中ならtrue")]
     private bool _isCharging = false;
-    private OnlyOnce _onlyOnce_ChargeM = new OnlyOnce();
-    private OnlyOnce _onlyOnce_ChargeL = new OnlyOnce();
+    private OnlyOnce _onlyOnceChargeMedium = new OnlyOnce();
+    private OnlyOnce _onlyOnceChargeLarge = new OnlyOnce();
 
     private ReactiveProperty<ChargeLevel> _chargeLevel = new ReactiveProperty<ChargeLevel>();
     public IReadOnlyReactiveProperty<ChargeLevel> ChargeLevel => _chargeLevel;
@@ -51,7 +54,7 @@ public abstract class Weapon : MonoBehaviour
 
     private async void OnCharge(InputAction.CallbackContext context)
     {
-        _chargeLevel.Value = global::ChargeLevel.S;
+        _chargeLevel.Value = global::ChargeLevel.Small;
         _isCharging = true;
         await ChargeAsync();
     }
@@ -64,8 +67,8 @@ public abstract class Weapon : MonoBehaviour
         // 初期化
         _chargedTime_s = 0f;
         _chargeLevel.Value = global::ChargeLevel.None;
-        _onlyOnce_ChargeM.Reset();
-        _onlyOnce_ChargeL.Reset();
+        _onlyOnceChargeMedium.Reset();
+        _onlyOnceChargeLarge.Reset();
     }
 
     /// <summary>
@@ -92,16 +95,17 @@ public abstract class Weapon : MonoBehaviour
     {
         // (最大チャージ時間の半分 <= チャージ時間 < 最大チャージ時間)のとき「M」
         // (1.5s <= チャージ時間 < 3s)
-        if (_chargedTime_s >= _maxChargeTime_s / 2 && _chargedTime_s < _maxChargeTime_s)
+        if (_chargedTime_s >= (_maxChargeTimeSec / 2) && 
+            _chargedTime_s < _maxChargeTimeSec)
         {
-            _onlyOnce_ChargeM.Execution(
-                () => _chargeLevel.Value = global::ChargeLevel.M);
+            _onlyOnceChargeMedium.Execution(
+                () => _chargeLevel.Value = global::ChargeLevel.Medium);
         }
         // 最大チャージ時間以上のとき「L」
-        else if (_chargedTime_s >= _maxChargeTime_s)
+        else if (_chargedTime_s >= _maxChargeTimeSec)
         {
-            _onlyOnce_ChargeL.Execution(
-                () => _chargeLevel.Value = global::ChargeLevel.L);
+            _onlyOnceChargeLarge.Execution(
+                () => _chargeLevel.Value = global::ChargeLevel.Large);
         }
     }
 

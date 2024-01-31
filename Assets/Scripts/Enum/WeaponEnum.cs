@@ -19,16 +19,7 @@ public enum ChargeLevel
     /// ”ñƒ`ƒƒ[ƒWó‘Ô
     /// </summary>
     None,
-    /// <summary>
-    /// Small
-    /// </summary>
-    S, 
-    /// <summary>
-    /// Midium
-    /// </summary>
-    M, 
-    /// <summary>
-    /// Large
-    /// </summary>
-    L,
+    Small, 
+    Medium, 
+    Large,
 }
