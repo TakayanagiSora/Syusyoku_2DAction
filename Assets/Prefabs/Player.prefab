@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e8883032924741ac701a0f00e1788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxChargeTime_s: 3
+  _maxChargeTimeSec: 2.5
   _normalBullet_S: {fileID: 5192186535771819360}
   _normalBullet_M: {fileID: 759298415094951152}
   _normalBullet_L: {fileID: 911371372999892566}

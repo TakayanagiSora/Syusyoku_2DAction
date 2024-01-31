@@ -4,6 +4,9 @@ using System.Threading;
 using System;
 using UniRx;
 
+/// <summary>
+/// 弾の基底システム（抽象）
+/// </summary>
 public abstract class Bullet : PoolObject
 {
     [SerializeField, Tooltip("基本速度"), Min(0)]
@@ -18,13 +21,16 @@ public abstract class Bullet : PoolObject
     // 初期EnemyLayer
     protected int _targetLayer = 1 << 7;
 
-    private CancellationTokenSource _cts = default;
-    private CapsuleCollider2D _collider = default;
+    [Tooltip("自身のコライダー")]
+    private CapsuleCollider2D _myCollider = default;
     [Tooltip("ヒットしたコライダーを格納する配列")]
     // Overlap-NonAlloc関数で使用。GC頻度を下げるため、配列をあらかじめ作成
     // 暗示的に「ヒットしたすべてのコライダーを格納」としたいため、十分な数を確保
     private Collider2D[] _hitColliders = new Collider2D[16];
 
+    private CancellationTokenSource _cts = default;
+
+    [Tooltip("弾が対象に当たったときに発火するイベント")]
     private Subject<Vector2> _hitSubject = new Subject<Vector2>();
     public IObservable<Vector2> OnHitBullet => _hitSubject;
 
@@ -32,7 +38,7 @@ public abstract class Bullet : PoolObject
     protected virtual void Awake()
     {
         _transform = this.transform;
-        _collider = this.GetComponent<CapsuleCollider2D>();
+        _myCollider = this.GetComponent<CapsuleCollider2D>();
         _poolController = FindObjectOfType<PoolController>();
     }
 
@@ -84,7 +90,7 @@ public abstract class Bullet : PoolObject
     private void CheckCollision()
     {
         // 当たり判定を取得
-        int count = Physics2D.OverlapCapsuleNonAlloc(_transform.position, _collider.size, _collider.direction, 0f, _hitColliders, _targetLayer);
+        int count = Physics2D.OverlapCapsuleNonAlloc(_transform.position, _myCollider.size, _myCollider.direction, 0f, _hitColliders, _targetLayer);
 
         // 取得したコライダーのオブジェクトにダメージを与える
         for (int i = 0; i < count; i++)
